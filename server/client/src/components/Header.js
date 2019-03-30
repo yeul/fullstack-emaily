@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 
@@ -26,7 +27,9 @@ class Header extends React.Component {
     return (
       <nav>
         <div className='nav-wrapper'>
-          <a className='brand-logo left'>Emaily</a>
+          <Link to={this.props.auth ? "/dashboard" : "/"} className='left brand-logo'>
+            Emaily
+          </Link>
           <ul id='nav-mobile' className='right'>
             {this.renderContent()}
           </ul>
