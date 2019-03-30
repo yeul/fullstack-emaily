@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions";
+import Payments from "./Payments";
 
 class Header extends React.Component {
   renderContent() {
@@ -16,9 +17,14 @@ class Header extends React.Component {
         );
       default:
         return (
-          <li>
-            <a href='/api/logout'>Logout</a>
-          </li>
+          <React.Fragment>
+            <li>
+              <Payments />
+            </li>
+            <li>
+              <a href='/api/logout'>Logout</a>
+            </li>
+          </React.Fragment>
         );
     }
   }
@@ -26,7 +32,7 @@ class Header extends React.Component {
   render() {
     return (
       <nav>
-        <div className='nav-wrapper'>
+        <div className='nav-wrapper blue'>
           <Link to={this.props.auth ? "/dashboard" : "/"} className='left brand-logo'>
             Emaily
           </Link>
