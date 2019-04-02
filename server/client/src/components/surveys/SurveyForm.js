@@ -2,6 +2,7 @@
 import _ from "lodash";
 import React from "react";
 import { reduxForm, Field } from "redux-form";
+import { Link } from "react-router-dom";
 import SurveyField from "./SurveyField";
 
 //iterate over array of fields. for every object inside array, run lodash _.map fx. pull off label and name from each 'field' object.
@@ -25,7 +26,14 @@ class SurveyForm extends React.Component {
       <div>
         <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
           {this.renderFields()}
-          <button type='submit'>Submit</button>
+          <Link to='/surveys' className='btn grey darken-1'>
+            <i class='material-icons right'>cancel</i>
+            Cancel
+          </Link>
+          <button type='submit' className='btn right red accent-3'>
+            <i class='material-icons right'>arrow_forward</i>
+            Next
+          </button>
         </form>
       </div>
     );

@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <div className='container'>
         <Router>
-          <div>
+          <div className='container'>
             <Header />
             <Switch>
               <Route path='/' exact component={Landing} />
