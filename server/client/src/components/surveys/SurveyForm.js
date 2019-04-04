@@ -36,7 +36,7 @@ class SurveyForm extends React.Component {
 function validate(values) {
   const errors = {};
 
-  errors.emails = validateEmails(values.emails || "");
+  errors.emails = validateEmails(values.recipients || "");
 
   //square brackets on values[] says we are going to reference a proprty on an object on the fly. the key itself not the whole name key-value pair {name: whatever}
   _.each(formFields, ({ name }) => {
