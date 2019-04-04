@@ -1,15 +1,43 @@
 //Shows users their form inputs for review.
 import React from "react";
+import _ from "lodash";
+import { connect } from "react-redux";
+import formFields from "./formFields";
+import * as actions from "../../actions";
 
-const SurveyFormReview = ({ onCancel }) => {
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
+  const reviewFields = _.map(formFields, ({ name, label }) => {
+    return (
+      <div key={name}>
+        <label>{label}</label>
+        <div>{formValues[name]}</div>
+      </div>
+    );
+  });
+
   return (
     <div>
       <h5>Please confirm your entries.</h5>
-      <button className='red accent-3 btn' onClick={onCancel}>
+      {reviewFields}
+      <button className='red accent-3 btn left' onClick={onCancel}>
+        <i className='material-icons left'>arrow_back</i>
         Back
+      </button>
+      <button onClick={() => submitSurvey(formValues)} className='green accent-3 btn right'>
+        <i className='material-icons right'>send</i>
+        Send Survey
       </button>
     </div>
   );
 };
 
-export default SurveyFormReview;
+function mapStateToProps(state) {
+  return {
+    formValues: state.form.surveyForm.values
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  actions
+)(SurveyFormReview);
