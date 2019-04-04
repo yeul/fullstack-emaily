@@ -4,6 +4,7 @@ import React from "react";
 import { reduxForm, Field } from "redux-form";
 import { Link } from "react-router-dom";
 import SurveyField from "./SurveyField";
+import validateEmails from "../../utils/validateEmails";
 
 //iterate over array of fields. for every object inside array, run lodash _.map fx. pull off label and name from each 'field' object.
 //create a new reduxForm field then return it. new array is passed into renderFields() which is passed to render().
@@ -40,6 +41,21 @@ class SurveyForm extends React.Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  errors.emails = validateEmails(values.emails || "");
+
+  //square brackets on values[] says we are going to reference a proprty on an object on the fly. the key itself not the whole name key-value pair {name: whatever}
+  _.each(FIELDS, ({ name }) => {
+    if (!values[name]) {
+      errors[name] = "Required";
+    }
+  });
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: "surveyForm"
 })(SurveyForm);
